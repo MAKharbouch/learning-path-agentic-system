@@ -26,6 +26,12 @@ st.set_page_config(
     layout="wide",
 )
 
+# -------------------------------------------------------------------------
+# Database initialization (idempotent)
+# -------------------------------------------------------------------------
+from db.schema import init_db
+init_db()
+
 # ---------------------------------------------------------------------------
 # Global CSS
 # ---------------------------------------------------------------------------
@@ -210,6 +216,8 @@ def _check_data_ready():
     try:
         courses = conn.execute("SELECT COUNT(*) FROM courses").fetchone()[0]
         skills = conn.execute("SELECT COUNT(*) FROM course_skills").fetchone()[0]
+    except Exception:
+        courses, skills = 0, 0
     finally:
         conn.close()
 
