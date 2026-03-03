@@ -16,7 +16,7 @@ ENV/
 .env
 
 # Data (database and chroma files are local artifacts)
-data/
+# data/
 
 # IDE
 .idea/
