@@ -221,11 +221,23 @@ def _check_data_ready():
     finally:
         conn.close()
 
+    # Check ChromaDB embeddings
+    embeddings = 0
     try:
-        collection = get_collection_no_embeddings()
-        embeddings = collection.count()
-    except Exception:
-        embeddings = 0
+        from config import CHROMA_PATH, CHROMA_COLLECTION_NAME
+        import chromadb
+        
+        client = chromadb.PersistentClient(path=str(CHROMA_PATH))
+        # Try to get existing collection (don't create if missing)
+        try:
+            collection = client.get_collection(name=CHROMA_COLLECTION_NAME)
+            embeddings = collection.count()
+        except Exception:
+            # Collection doesn't exist - embeddings = 0
+            pass
+    except Exception as e:
+        import streamlit as st
+        st.warning(f"ChromaDB error: {e}")
 
     return {"courses": courses, "skills": skills, "embeddings": embeddings}
 
