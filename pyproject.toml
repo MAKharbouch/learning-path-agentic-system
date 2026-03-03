@@ -1,0 +1,44 @@
+[project]
+name = "learning-path-agent"
+version = "0.1.0"
+description = "AI agent system for personalized learning plan generation"
+requires-python = ">=3.11"
+dependencies = [
+    "chromadb>=1.4.1",
+    "openai>=1.0",
+    "pydantic>=2.0",
+    "python-dotenv>=1.0",
+    "openpyxl>=3.1",
+    "pandas>=2.0",
+    "langgraph==1.0.8",
+    "langchain-openai>=0.2",
+    "streamlit>=1.30",
+    "langchain-google-genai>=4.2.0",
+    "sentence-transformers>=5.2.2",
+    "langchain==1.2.10",
+    "rank-bm25>=0.2.2",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=4.0",
+]
+ollama = ["langchain-ollama>=0.2"]
+gemini = ["langchain-google-genai>=2.0"]
+local-embeddings = ["sentence-transformers>=2.0"]
+all-providers = [
+    "langchain-ollama>=0.2",
+    "langchain-google-genai>=2.0",
+    "sentence-transformers>=2.0",
+]
+
+[project.scripts]
+draw-graph = "orchestrator.draw_graph:main"
+
+[build-system]
+requires = ["setuptools>=75.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
