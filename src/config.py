@@ -46,7 +46,7 @@ SAMPLE_DATA_DIR: Path = BASE_DIR / "excel_data"
 
 # LLM
 LLM_PROVIDER: str = _get_secret("LLM_PROVIDER", "openai")
-LLM_MODEL: str = _get_secret("LLM_MODEL", "")
+LLM_MODEL: str = _get_secret("LLM_MODEL", "gpt-4o")
 
 # Embeddings
 EMBEDDING_PROVIDER: str = _get_secret("EMBEDDING_PROVIDER", "local")

@@ -20,13 +20,14 @@ def get_chat_model() -> BaseChatModel:
     Returns:
         A BaseChatModel instance.
     """
-    from config import LLM_MODEL, LLM_PROVIDER
+    from config import LLM_MODEL, LLM_PROVIDER, OPENAI_API_KEY
 
     return cast(
         BaseChatModel,
         init_chat_model(
-            LLM_MODEL or None,
+            model=LLM_MODEL,
             model_provider=LLM_PROVIDER.lower(),
             temperature=0,
+            api_key=OPENAI_API_KEY if OPENAI_API_KEY else None,
         ),
     )

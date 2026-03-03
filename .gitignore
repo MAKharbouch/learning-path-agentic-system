@@ -15,6 +15,9 @@ ENV/
 # Environment variables
 .env
 
+# Streamlit secrets (contains API keys - never commit!)
+.streamlit/secrets.toml
+
 # Data (database and chroma files are local artifacts)
 # data/
 
